@@ -14,7 +14,7 @@
                 <div>
                     <input type="text" name="name">
                 </div>
-
+                
                 <h3>メールアドレス</h3>
                 <div>
                     <input type="text" name="mail">
@@ -22,7 +22,7 @@
 
                 <h3>パスワード</h3>
                 <div>
-                    <input type="password" name="pw">
+                    <input type="password" name="password">
                 </div>
 
                 <button>登録</button><br>
