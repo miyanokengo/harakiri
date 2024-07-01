@@ -10,7 +10,7 @@ var_dump($_POST);
 if(empty($_POST["name"])){
     $error_flg = 1; 
     
-}else if(empty($_POST["pw"])){
+}else if(empty($_POST["password"])){
     $error_flg = 1;
 
 }else if(empty($_POST["mail"])){
@@ -32,15 +32,18 @@ if(empty($_POST["name"])){
         $error_flg = 1;
     }else{
         //その結果が存在していなかったらインサートする
-        $sql = "insert into users (name,mail,pw) values (:name, :mail, :pw,)";
+        $sql = "INSERT INTO users (name, mail, password) VALUES (:name, :mail, :password)";
         
         $stm = $pdo->prepare($sql);
         $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
         $stm->bindValue(':mail',$_POST["mail"],PDO::PARAM_STR);
-        $stm->bindValue(':pw',$_POST["pw"],PDO::PARAM_STR);
+        $stm->bindValue(':password',$_POST["password"],PDO::PARAM_STR);
         $stm->execute();
+
+        
+
     }}
         if($error_flg != 1){
-            header("Location:login.php");
+            header("Location:register_result.php");
         }
 ?>

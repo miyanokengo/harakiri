@@ -1,44 +1,55 @@
 <?php
 session_start();
+require_once ('db_connect.php');
+//エラーフラグが1だった場合はエラーを出す
+$error_flg = 0;
+if(isset($_POST) && !empty($_POST)) {
+    if (!empty($_POST['mail'])) {
+        $mail = $_POST['mail'];
+    } else {
+        $error_flg = 1;
+    }
+    if (!empty($_POST['password'])) {
+        $password = $_POST['password'];
+    }else{
+        $error_flg = 1;
+    }
+//セッションにエラーメッセージを入れる
+    if($error_flg === 1){
+        $_SESSION['errormessage']=$error_flg;
+        //ログイン画面にリダイレクトする処理が必要
+        header("Location:login.php");
+    }else{
+        $_SESSION['errormessage']="";
 
-// データベース接続情報
-$db_host = 'localhost'; // データベースホスト
-$db_user = 'mail';  // データベースユーザー名
-$db_password = 'password'; // データベースパスワード
-$db_name = 'harakiri'; // 使用するデータベース名
+    }
 
-// フォームから送られてきたデータの取得
-$mail = $_POST['mail'];
-$password = $_POST['password'];
+    if (isset($mail) && isset($password)) {
+        
+        $sql = "SELECT * FROM users WHERE mail = :mail";
+        $stm = $pdo->prepare($sql);
+        $stm->bindValue(':mail',$mail,PDO::PARAM_STR);
+        $stm->execute();
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        if($result !== false){
+            if($password === $result["password"]){
+                //セッションにユーザー名を入れる         
+                $_SESSION['name'] = $name;
+                // キー'count'が登録されていなければ、1を設定
+                $_SESSION['mail'] = $mail;
+                //セッションにユーザーidを入れる
+                $_SESSION['usersid'] = $result['id'];
 
-// パスワードのハッシュ化
-$hashed_password = md5($password); // MD5でハッシュ化（セキュリティ上は推奨されない）
-
-// データベース接続
-$conn = new mysql($db_host, $db_user, $db_password, $db_name);
-
-// 接続エラーの確認
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+                //home.phpにリダイレクトする1
+                header("Location:home.php");
+                exit();
+                
+            }else{
+                $error_flg = 1;
+            }
+        }else{
+            $error_flg = 1;
+        }
+    }
 }
-
-// ユーザーの存在確認と認証
-$stm = $conn->prepare("SELECT id, mail, password FROM users WHERE mail=?");
-$stm->bind_param("s", $mail);
-$stm->execute();
-$stm->bind_result($user_id, $db_name, $db_password_hash);
-$stm->fetch();
-
-if (password_verify($password, $db_password_hash)) {
-    // ログイン成功時の処理
-    $_SESSION['user_id'] = $user_id;
-    $_SESSION['mail'] = $db_mail;
-    header("Location: welcome.php"); // ログイン成功後のリダイレクト先
-} else {
-    // ログイン失敗時の処理
-    echo "Invalid username or password. Please try again.";
-}
-
-$stmt->close();
-$conn->close();
 ?>
