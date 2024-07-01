@@ -1,35 +1,46 @@
 <?php
-// データベース接続情報
-$db_host = 'localhost'; // データベースホスト
-$db_user = 'mail';  // データベースmail
-$db_password = 'password'; // データベースパスワード
-$db_name = 'harakiri'; // 使用するデータベース名
+require_once 'db_connect.php';
 
-// フォームから送られてきたデータの取得
-$username = $_POST['mail'];
-$password = $_POST['password'];
+session_start();
 
-// パスワードのハッシュ化
-$hashed_password = password_hash($password, PASSWORD_DEFAULT); // ハッシュ化
+var_dump($_POST);
 
-// データベース接続
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+//これはフォームの内容がからじゃなかったらインサートする
 
-// 接続エラーの確認
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+if(empty($_POST["name"])){
+    $error_flg = 1; 
+    
+}else if(empty($_POST["pw"])){
+    $error_flg = 1;
 
-// ユーザーの新規登録
-$stmt = $conn->prepare("INSERT INTO users (mail, password) VALUES (?, ?)");
-$stmt->bind_param("ss", $mail, $hashed_password);
+}else if(empty($_POST["mail"])){
+    $error_flg = 1;
+    
+}else{
+    echo "dadada";
+    
+    //データベースの中に今から登録をする名前が存在するかどうか
+    $sql = 'SELECT name FROM users WHERE name = :name';
 
-if ($stmt->execute()) {
-    echo "Registration successful!";
-} else {
-    echo "Error: " . $stmt->error;
-}
-
-$stmt->close();
-$conn->close();
+    //データベースの中から入力されたあたいをけんんさくする
+    $stm = $pdo->prepare($sql);
+    $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
+    $stm->execute();
+    //その結果存在していたらエラーをひょうじする
+    $result = $stm->fetch(PDO::FETCH_ASSOC);
+    if($result !== false){
+        $error_flg = 1;
+    }else{
+        //その結果が存在していなかったらインサートする
+        $sql = "insert into users (name,mail,pw) values (:name, :mail, :pw,)";
+        
+        $stm = $pdo->prepare($sql);
+        $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
+        $stm->bindValue(':mail',$_POST["mail"],PDO::PARAM_STR);
+        $stm->bindValue(':pw',$_POST["pw"],PDO::PARAM_STR);
+        $stm->execute();
+    }}
+        if($error_flg != 1){
+            header("Location:login.php");
+        }
 ?>
