@@ -24,6 +24,5 @@
             <div>投稿する</div>
     </a>
     <?php } ?>
-  
 </body>
 </html>
