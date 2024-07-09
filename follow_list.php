@@ -4,21 +4,22 @@ require_once 'db_connect.php'; // 例: データベース接続設定ファイ�
 
 session_start();
 
+
 // もしログインしていない場合はログインページにリダイレクトするなどの処理を行う
 
 // ログインしているユーザーのIDを取得
-$user_id = $_SESSION['user_id']; // 仮のセッション変数名
+$user_id = $_SESSION['usersid']; // 仮のセッション変数名
 
 // フォローしているユーザーの一覧を取得するSQLクエリ
-$sql = "SELECT u.username 
+$sql = "SELECT u.name 
         FROM users u
-        JOIN follows f ON u.user_id = f.followed_id
-        WHERE f.follower_id = :user_id
-        ORDER BY u.username ASC"; // ユーザー名の昇順で取得する例
+        JOIN follows f ON u.id = f.followed_id
+        WHERE f.follower_id = :usersid
+        ORDER BY u.name ASC"; // ユーザー名の昇順で取得する例
 
 try {
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(':usersid', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     $follows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -36,7 +37,7 @@ try {
     <h1>フォローしているユーザー一覧</h1>
     <ul>
         <?php foreach ($follows as $follow): ?>
-            <li><?php echo htmlspecialchars($follow['username']); ?></li>
+            <li><?php echo htmlspecialchars($follow['name']); ?></li>
         <?php endforeach; ?>
     </ul>
 </body>
