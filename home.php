@@ -1,11 +1,9 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-
 function es($string) {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
-
 try {
     $sql = "SELECT * FROM tweets";
     $stm = $pdo->prepare($sql); // $pdo を使用する
@@ -41,3 +39,10 @@ try {
     exit();
 }
 ?>
+        <?php }else{ ?>
+    <a href="post.php">
+            <div>投稿する</div>
+    </a>
+    <?php } ?>
+</body>
+</html>
