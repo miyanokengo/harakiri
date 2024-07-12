@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "ユーザー名";
 $password = "パスワード";
-$dbname = "データベース名";
+$dbname = "harakiri";
 
 // POSTデータから値を取得
 $user_id = $_POST['user_id'];
