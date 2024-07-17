@@ -1,9 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%; /* テーブルの幅を100%に設定 */
+            border-collapse: collapse; /* セル間の余白を取り除く */
+        }
+        th, td {
+            border: 1px solid #dddddd; /* セルの境界線を1pxの灰色で設定 */
+            padding: 8px; /* セルの内側の余白を設定 */
+            text-align: left; /* 文字を左寄せにする */
+        }
+        th {
+            background-color: #f2f2f2; /* ヘッダー行の背景色を設定 */
+        }
+    </style>
+</head>
+<body>
 <?php
-// データベース接続情報を含むファイルを読み込む
-require_once 'db_connect.php'; // 例: データベース接続設定ファイル
-
 session_start();
+require_once 'db_connect.php';
+try{
+//SQL文の作成
+$sql = "SELECT * FROM users";
 
+$stm = $pdo->prepare($sql);
+
+$stm->execute();
+
+$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+echo "<table>";
+echo "<thead><tr>";
+echo "<th>","id","</th>";
+echo "<th>","mail","</th>";7
+echo "<th>","pass","</th>";
+echo "<th>","名前","</th>";
+echo "<th>","フォロー","</th>";
+echo "</thead></tr>";
+
+//値を取り出して行に表示する
+echo "<tbody>";
+//1行ずつテーブルに入れる
+foreach ($result as $row){
+    echo "<tr>";
+    echo "<td>",es($row['id']),"</td>";
+    echo "<td>",es($row['mail']),"</td>";
+    echo "<td>",es($row['password']),"</td>";
+    echo "<td>",es($row['name']),"</td>";
+    // echo "<td>",es($row['']),"</td>";
+    echo "</tr>";
 
 // もしログインしていない場合はログインページにリダイレクトするなどの処理を行う
 
@@ -25,20 +74,17 @@ try {
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
-?>
+echo "</tbody>";
+echo "</body>";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>フォロー一覧</title>
-</head>
-<body>
-    <h1>フォローしているユーザー一覧</h1>
-    <ul>
-        <?php foreach ($follows as $follow): ?>
-            <li><?php echo htmlspecialchars($follow['name']); ?></li>
-        <?php endforeach; ?>
-    </ul>
+}catch(Exception $e){
+    echo '<span class="error">エラー発見</span><br>';
+    echo $e->getMessage();
+    exit();
+}
+    function es($string) {
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+?>
 </body>
 </html>
