@@ -1,4 +1,7 @@
-
+<?php
+    session_start();
+    var_dump($_SESSION);
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -17,18 +20,18 @@
     <div>
         <p>記事投稿</p>
 
-        <form action="postresult.php" method="POST">
+        <form action="postresult.php" method="POST" enctype="multipart/form-data">
 
-            <div class="content">
+            <div>
                 <p>内容</p>
-                <textarea class="content" name="content"></textarea>
+                <textarea name="content"></textarea>
             </div>
                 <div>
                     <img :src="url" alt="画像が出るはず">
                 </div>
 
                 <div>
-                    <input type="file" name="image">  
+                    <input type="file" name="image">
                 </div>
             </div>
     </div>

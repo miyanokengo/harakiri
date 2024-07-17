@@ -12,16 +12,30 @@ $server="localhost:3308";
 $dsn="mysql:host={$server};dbname={$database};charset=utf8";
 
 //mysqlデータベースへの接続
+// try {
+//     //PDOクラスのインスタンスを作成してDBに接続する
+//     $pdo=new PDO($dsn,$user,$pass);
+//     //プリペアードステートメントのエミュレーションを無効化
+//     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
+//     //例外がスローさてるようにする
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+//     echo "データベースに接続しました";
+// } catch (Exception $e) {
+//     echo "DB接続エラー";
+//     echo $e->getMessage();
+//     exit();
+// }
+
 try {
-    //PDOクラスのインスタンスを作成してDBに接続する
-    $pdo=new PDO($dsn,$user,$pass);
+    // PDOオブジェクトの作成
+    $pdo = new PDO($dsn, $user, $pass);
     //プリペアードステートメントのエミュレーションを無効化
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-    //例外がスローさてるようにする
-    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    echo "データベースに接続しました";
-} catch (Exception $e) {
-    echo "DB接続エラー";
-    echo $e->getMessage();
+    // エラーモードを例外モードに設定
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "データベースに接続しました。";
+} catch (PDOException $e) {
+    // エラーが発生した場合の処理
+    echo "データベースに接続できませんでした。エラー: " . $e->getMessage();
     exit();
 }
