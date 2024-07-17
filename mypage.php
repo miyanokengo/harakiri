@@ -54,7 +54,7 @@ try {
 ?>
     <a href="createmypage.php">マイページ編集</a>
     <a href="follow_list.php">フォロー中</a>
-    <a href="follow_list.php">フォロワー</a>
+    <a href="follower_list.php">フォロワー</a>
 </body>
 </html>
 
