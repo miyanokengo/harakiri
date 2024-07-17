@@ -4,7 +4,7 @@ session_start(); // セッションを開始する（必要に応じて）
 
 // // ログインユーザーのID（セッションなどから取得する）
 $loggedInUserId = $_SESSION['usersid'];; // 例として1を使用
-var_dump  ($loggedInUserId);
+
 // ユーザーの表示など
 // 例としてユーザー1から3までのユーザーを表示する
 for ($i = 1; $i <= 3; $i++) {

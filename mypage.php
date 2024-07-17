@@ -52,8 +52,8 @@ try {
     echo $e->getMessage();
 }
 ?>
-    <a href="createmypage.php">マイページ編集</a>
-    <a href="follow_list.php">フォロー中</a>
+    <a href="createmypage.php">マイページ登録・編集</a>
+    <a href="follow_list.php">フォローしたい人はこっち</a>
     <a href="follow_list.php">フォロワー</a>
 </body>
 </html>
