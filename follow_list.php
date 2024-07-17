@@ -51,7 +51,7 @@ foreach ($result as $row){
     echo "<td>",es($row['mail']),"</td>";
     echo "<td>",es($row['password']),"</td>";
     echo "<td>",es($row['name']),"</td>";
-    // echo "<td>",es($row['']),"</td>";
+    echo "<td><button>フォロー</button></td>"; // 登録ボタンを追加
     echo "</tr>";
 }
 echo "</tbody>";
