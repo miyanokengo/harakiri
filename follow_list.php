@@ -54,7 +54,7 @@ foreach ($result as $row){
     echo "<td><form action='follow_management.php' method='GET'>
     <input type='hidden' name='id' value='", es($row['id']), "'>
     <button type='submit'>フォロー</button>
-    </form></td>"; // ボタンの形式で登録処理ページに送信する
+    </form></td>"; // ボタンの形式で登録処理ページに送信する。
     echo "</tr>";
 }
 echo "</tbody>";
