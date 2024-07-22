@@ -33,7 +33,6 @@ try {
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
     // エラーモードを例外モードに設定
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "データベースに接続しました。";
 } catch (PDOException $e) {
     // エラーが発生した場合の処理
     echo "データベースに接続できませんでした。エラー: " . $e->getMessage();
