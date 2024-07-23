@@ -2,29 +2,32 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCLサークルアプリ</title>
-    <link rel="stylesheet" href="register.css">
+    <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>MCLサークルアプリ</h1>
-    </header>
-    <div class="container">
-        <form action="#" method="post">
-            <label for="username">ユーザー名</label>
-            <input type="text" id="username" name="username" required>
+    <!-- 特定ページのコンテンツをここに追加 -->
+        <h2>新規登録</h2>
+        <form action="register_process.php" method="post">
+                <h3>ユーザー名</h3>
+                <div>
+                    <input type="text" name="name">
+                </div>
+                
+                <h3>メールアドレス</h3>
+                <div>
+                    <input type="text" name="mail">
+                </div>
 
-            <label for="userid">ユーザーID</label>
-            <input type="text" id="userid" name="userid" required>
+                <h3>パスワード</h3>
+                <div>
+                    <input type="password" name="password">
+                </div>
 
-            <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">パスワード</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">登録</button>
+                <button>登録</button><br>
+                <label>アカウントをお持ちの方は<a href="login.php">コチラ</a></label>
+            </div>
         </form>
     </div>
 </body>
