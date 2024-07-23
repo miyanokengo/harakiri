@@ -46,6 +46,7 @@ try {
     echo "<th>フォロー</th>";
     echo "</tr></thead>";
 
+
     echo "<tbody>";
 
     foreach ($result as $row) {

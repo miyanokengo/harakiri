@@ -6,14 +6,17 @@ if (!isset($_SESSION['usersid'])) {
     die("ログインしていません。");
 }
 $follower_id = $_SESSION['usersid'];
+
 // フォロー/フォロー解除のリクエストを処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['followed_user_id'])) {
         die("フォローするユーザーIDが指定されていません。");
     }
+
     $followed_id = $_POST['followed_user_id'];
 
     // 自分自身をフォローできないようにするチェック
+
 if ($follower_id == $followed_id) {
     die("自分自身をフォローすることはできません。");
 }
