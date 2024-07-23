@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $followed_id = $_POST['followed_user_id'];
-    
-// 自分自身をフォローできないようにするチェック
+
+    // 自分自身をフォローできないようにするチェック
+
 if ($follower_id == $followed_id) {
     die("自分自身をフォローすることはできません。");
 }
