@@ -51,8 +51,9 @@ foreach ($result as $row){
     echo "<td>",es($row['mail']),"</td>";
     echo "<td>",es($row['password']),"</td>";
     echo "<td>",es($row['name']),"</td>";
-    echo "<td><form action='follow_management.php' method='GET'>
-    <input type='hidden' name='id' value='", es($row['id']), "'>
+    echo "<td><form action='follow_management.php' method='post'>
+    <input type='hidden' name='followed_user_id' value='", es($row['id']), "'>
+    <input type='hidden' name='action' value='follow'>
     <button type='submit'>フォロー</button>
     </form></td>"; // ボタンの形式で登録処理ページに送信する。
     echo "</tr>";
