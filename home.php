@@ -1,6 +1,20 @@
 <?php
 session_start();
 require_once 'db_connect.php';
+function es($string) {
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+
+try {
+    $sql = "SELECT * FROM tweets";
+    $stm = $pdo->prepare($sql);
+    $stm->execute();
+    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo '<span class="error">エラーがありました</span><br>';
+    echo $e->getMessage();
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
