@@ -10,3 +10,6 @@
     $stm->execute();
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<?php
+    
+?>

@@ -14,7 +14,7 @@ let logDisplayElm = document.querySelector('table')
 let myForm = document.forms.myForm
 
 //送信用URL
-const insertURL = '#'
+const insertURL = 'http://localhost/harakiri/api/home.php'
 //受信用URL
 const selectURL = 'http://localhost/harakiri/api/home.php'
 
@@ -59,8 +59,8 @@ function getPost() {
     
 }
 
-//送信処理
-//フォームが送信された時にイベントが発火する
+// //送信処理
+// //フォームが送信された時にイベントが発火する
 // myForm.addEventListener('submit', (e) => {
 //     //preventDefaultで実際の送信は行わない（画面の遷移をしないようにする）
 //     e.preventDefault()
@@ -80,4 +80,27 @@ function getPost() {
     
 
 // })
+document.getElementById('postForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // デフォルトのフォーム送信を防止
+
+
+    //フォームデータを取得
+    const form = event.target;
+    const formData = new FormData(form);
+    console.log(formData);
+    
+    try {
+        const response = await fetch('http://localhost/harakiri/api/getpost.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => {
+            console.log("ここまで通った");
+            console.log(res.text());
+        });
+    } catch (error) {
+        console.log('エラーが発生しました: ' + error.message);
+    }
+});
+
 
