@@ -2,10 +2,14 @@
 session_start();
     require_once 'db_connect.php';
 
+    //まずこのページにポストが来ているかどうか
+    //かつ$_POSTのcontentがあるかどうか
+    //contentがあったらコンテントの処理
+
     $content=$_POST["content"];
     $user_id=$_SESSION["usersid"];
     
-
+    
 //  if(isset($_POST["Release"])){
 //     $releaseid=0;
 //  }else{
@@ -26,15 +30,15 @@ $error_flg=0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ファイルがアップロードされているかチェック
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    if (isset($_FILES['image'])) {
         // アップロードディレクトリを設定
-        $uploadDir = 'uploads/';
+        // $uploadDir = 'uploads/';
         // ファイル名を設定
-        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+        // $uploadFile = $uploadDir . basename($_FILES['image']['name']);
         // アップロードディレクトリが存在しない場合は作成
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
+        // if (!is_dir($uploadDir)) {
+        //     mkdir($uploadDir, 0777, true);
+        // }
         // ファイルを指定したディレクトリに移動
         if  (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
             echo 'ファイルは正常にアップロードされました: ' . $uploadFile;
