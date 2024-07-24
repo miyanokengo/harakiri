@@ -1,21 +1,6 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-
-function es($string) {
-    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-}
-
-try {
-    $sql = "SELECT * FROM tweets";
-    $stm = $pdo->prepare($sql);
-    $stm->execute();
-    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-} catch (Exception $e) {
-    echo '<span class="error">エラーがありました</span><br>';
-    echo $e->getMessage();
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,8 +61,6 @@ try {
         </div>
     </div>
 <?php endif; ?>
-
-
 
 //きじのいちらんをjsonで取得するプログラムこれをajaxで呼び出す。
 //投稿された内容を登録するこれをajaxように改造する。

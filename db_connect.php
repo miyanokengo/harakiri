@@ -38,3 +38,26 @@ try {
     echo "データベースに接続できませんでした。エラー: " . $e->getMessage();
     exit();
 }
+
+//編集の更新処理
+// ユーザープロフィールを更新する関数
+function update_user_profile($pdo, $user_id, $new_name, $new_bio) {
+    try {
+        // プリペアドステートメントを作成
+        $stmt = $pdo->prepare("UPDATE users SET username = :new_name, bio = :new_bio WHERE id = :user_id");
+
+        // パラメータをバインド
+        $stmt->bindParam(':new_name', $new_name, PDO::PARAM_STR);
+        $stmt->bindParam(':new_bio', $new_bio, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+        // クエリを実行
+        $stmt->execute();
+
+        // 更新が成功した場合、影響を受けた行数が1であることを確認することもできますが、省略しています
+
+    } catch (PDOException $e) {
+        die("データベース更新エラー: " . $e->getMessage());
+    }
+}
+?>

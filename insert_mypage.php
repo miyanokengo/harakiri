@@ -1,45 +1,32 @@
 <?php
-require_once 'db_connect.php';
+// データベースへの接続
+require_once 'db_connect.php'; // db_connect.php は実際のデータベース接続情報を含む必要があります
 
-session_start();
+// POSTされたデータの取得
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $bio = $_POST['bio'];
 
-var_dump($_POST);
+    // SQL文の準備
+    $sql = "INSERT INTO users (username, bio) VALUES (:username, :bio)";
 
-//これはフォームの内容がからじゃなかったらインサートする
+    try {
+        // ステートメントの準備
+        $stmt = $pdo->prepare($sql);
 
-if(empty($_POST["name"])){
-    $error_flg = 1; 
-    
-}else if(empty($_POST["bio"])){
-    $error_flg = 1;
-    
-}else{
-    echo "dadada";
-    
-    //データベースの中に今から登録をする名前が存在するかどうか
-    $sql = 'SELECT name FROM profiles WHERE name = :name';
+        // パラメータのバインド
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
 
-    //データベースの中から入力されたあたいをけんんさくする
-    $stm = $pdo->prepare($sql);
-    $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
-    $stm->execute();
-    //その結果存在していたらエラーをひょうじする
-    $result = $stm->fetch(PDO::FETCH_ASSOC);
-    if($result !== false){
-        $error_flg = 1;
-    }else{
-        //その結果が存在していなかったらインサートする
-        $sql = "INSERT INTO profiles (name, bio) VALUES (:name, :bio)";
-        
-        $stm = $pdo->prepare($sql);
-        $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
-        $stm->bindValue(':bio',$_POST["bio"],PDO::PARAM_STR);
-        $stm->execute();
+        // SQL実行
+        $stmt->execute();
 
-        
+        // 成功時のメッセージ
+        echo "マイページが登録されました。";
 
-    }}
-        if($error_flg != 1){
-            header("Location:mypage_result.php");
-        }
+    } catch (PDOException $e) {
+        // エラーメッセージの表示
+        echo "エラー: " . $e->getMessage();
+    }
+}
 ?>
