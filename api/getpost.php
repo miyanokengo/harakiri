@@ -27,4 +27,5 @@
     $data = $stm->fetchAll(PDO::FETCH_ASSOC);
     $postid = $pdo -> lastInsertId();
     
+
 ?>
