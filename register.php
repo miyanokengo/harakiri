@@ -12,7 +12,7 @@
         <h1>MCLサークルアプリ</h1>
     </header>
     <div class="container">
-        <form action="#" method="post">
+        <form action="register_process.php" method="post">
             <label for="username">ユーザー名</label>
             <input type="text" id="username" name="username" required>
             <label for="userid">ユーザーID</label>

@@ -7,13 +7,13 @@ var_dump($_POST);
 
 //これはフォームの内容がからじゃなかったらインサートする
 
-if(empty($_POST["name"])){
+if(empty($_POST["username"])){
     $error_flg = 1; 
     
 }else if(empty($_POST["password"])){
     $error_flg = 1;
 
-}else if(empty($_POST["mail"])){
+}else if(empty($_POST["email"])){
     $error_flg = 1;
     
 }else{
@@ -24,7 +24,7 @@ if(empty($_POST["name"])){
 
     //データベースの中から入力されたあたいをけんんさくする
     $stm = $pdo->prepare($sql);
-    $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
+    $stm->bindValue(':name',$_POST["username"],PDO::PARAM_STR);
     $stm->execute();
     //その結果存在していたらエラーをひょうじする
     $result = $stm->fetch(PDO::FETCH_ASSOC);
@@ -35,8 +35,8 @@ if(empty($_POST["name"])){
         $sql = "INSERT INTO users (name, mail, password) VALUES (:name, :mail, :password)";
         
         $stm = $pdo->prepare($sql);
-        $stm->bindValue(':name',$_POST["name"],PDO::PARAM_STR);
-        $stm->bindValue(':mail',$_POST["mail"],PDO::PARAM_STR);
+        $stm->bindValue(':name',$_POST["username"],PDO::PARAM_STR);
+        $stm->bindValue(':mail',$_POST["email"],PDO::PARAM_STR);
         $stm->bindValue(':password',$_POST["password"],PDO::PARAM_STR);
         $stm->execute();
 
