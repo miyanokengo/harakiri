@@ -1,87 +1,43 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #DDDDDD;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #F2F2F2;
-        }
-    </style>
-</head>
-<body>
 <?php
+// データベース接続情報を含むファイルを読み込む
+require_once 'db_connect.php'; // 例: データベース接続設定ファイル
+
 session_start();
-require_once 'db_connect.php';
-function es($string) {
-    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-}
+
+// もしログインしていない場合はログインページにリダイレクトするなどの処理を行う
+
+// ログインしているユーザーのIDを取得
+$user_id = $_SESSION['usersid']; // 仮のセッション変数名
+
+// フォローしているユーザーの一覧を取得するSQLクエリ
+$sql = "SELECT u.name 
+        FROM users u
+        JOIN follows f ON u.id = f.followed_id
+        WHERE f.follower_id = :usersid
+        ORDER BY u.name ASC"; // ユーザー名の昇順で取得する例
+
 try {
-    $logged_in_user_id = $_SESSION['usersid'];
-    // SQL文の作成
-    $sql = "SELECT * FROM users";
-    $stm = $pdo->prepare($sql);
-    $stm->execute();
-    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-    echo "<table>";
-    echo "<thead><tr>";
-    echo "<th>id</th>";
-    echo "<th>メール</th>";
-    echo "<th>パスワード</th>";
-    echo "<th>名前</th>";
-    echo "<th>フォロー</th>";
-    echo "</tr></thead>";
-    echo "<tbody>";
-    foreach ($result as $row) {
-        $profile_user_id = $row['id'];
-        // フォロー状態を確認するクエリ
-        $follow_sql = "SELECT COUNT(*) FROM follows WHERE follower_id = :follower_id AND followed_id = :followed_id";
-        $follow_stm = $pdo->prepare($follow_sql);
-        $follow_stm->bindParam(':follower_id', $logged_in_user_id, PDO::PARAM_INT);
-        $follow_stm->bindParam(':followed_id', $profile_user_id, PDO::PARAM_INT);
-        $follow_stm->execute();
-        $is_following = $follow_stm->fetchColumn() > 0;
-        echo "<tr>";
-        echo "<td>", es($row['id']), "</td>";
-        echo "<td>", es($row['mail']), "</td>";
-        echo "<td>", es($row['password']), "</td>";
-        echo "<td>", es($row['name']), "</td>";
-        if ($is_following) {
-            echo "<td>
-            <form action='follow_management.php' method='POST'>
-                <input type='hidden' name='followed_user_id' value='", es($row['id']), "'>
-                <input type='hidden' name='action' value='unfollow'>
-                <button type='submit'>フォロー解除</button>
-            </form>
-            </td>";
-        } else {
-            echo "<td>
-            <form action='follow_management.php' method='POST'>
-                <input type='hidden' name='followed_user_id' value='", es($row['id']), "'>
-                <input type='hidden' name='action' value='follow'>
-                <button type='submit'>フォロー</button>
-            </form>
-            </td>";
-        }
-        echo "</tr>";
-    }
-    echo "</tbody>";
-    echo "</table>";
-} catch (Exception $e) {
-    echo '<span class="error">エラー発生: </span><br>';
-    echo $e->getMessage();
-    exit();
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':usersid', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $following = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>フォローしているユーザー一覧</title>
+</head>
+<body>
+    <h1>フォローしているユーザー一覧</h1>
+    <ul>
+        <?php foreach ($following as $user): ?>
+            <li><?php echo htmlspecialchars($user['name']); ?></li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>

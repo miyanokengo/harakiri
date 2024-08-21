@@ -53,7 +53,8 @@ try {
 }
 ?>
     <a href="createmypage.php">マイページ登録・編集</a>
-    <a href="follow_list.php">フォローしたい人はこっち</a>
+    <a href="follow_sitai_list.php">フォローしたい人一覧</a>
+    <a href="follow_list.php">フォロー一覧</a>
     <a href="follower_list.php">フォロワー</a>
 
 </body>
