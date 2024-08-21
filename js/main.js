@@ -90,7 +90,7 @@ document.getElementById('postForm').addEventListener('submit', async function(ev
     console.log(formData);
     
     try {
-        const response = await fetch('http://localhost/harakiri/api/getpost.php', {
+        const response = await fetch('http://localhost/harakiri/api/postresult.php', {
             method: 'POST',
             body: formData
         })
