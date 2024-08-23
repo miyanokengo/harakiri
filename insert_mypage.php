@@ -4,18 +4,18 @@ require_once 'db_connect.php'; // db_connect.php は実際のデータベース�
 
 // POSTされたデータの取得
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
+    $name = $_POST['name'];
     $bio = $_POST['bio'];
 
     // SQL文の準備
-    $sql = "INSERT INTO users (username, bio) VALUES (:username, :bio)";
+    $sql = "INSERT INTO users (name, bio) VALUES (:name, :bio)";
 
     try {
         // ステートメントの準備
         $stmt = $pdo->prepare($sql);
 
         // パラメータのバインド
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
 
         // SQL実行

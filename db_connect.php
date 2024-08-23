@@ -44,7 +44,7 @@ try {
 function update_user_profile($pdo, $user_id, $new_name, $new_bio) {
     try {
         // プリペアドステートメントを作成
-        $stmt = $pdo->prepare("UPDATE users SET username = :new_name, bio = :new_bio WHERE id = :user_id");
+        $stmt = $pdo->prepare("UPDATE users SET name = :new_name, bio = :new_bio WHERE id = :user_id");
 
         // パラメータをバインド
         $stmt->bindParam(':new_name', $new_name, PDO::PARAM_STR);
