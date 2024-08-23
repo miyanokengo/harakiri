@@ -21,19 +21,18 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MCLサークルアプリ</title>
+    <link rel="stylesheet" href="css/home.css">
+
 </head>
 <body>
-    
+<header>
+        <h1>MCLサークルアプリ</h1>
+    </header>
     <table>  
         <tbody id="table-body">
             <!-- ここにJavaScriptでtrが追加されます -->
             <tr>
-                <th>userid</th>
-                <th>content</th>
-                <th>created_at</th>
-                <th>nicepoint</th>
-                <th>image</th>
             </tr>
         </tbody>
     </table>
