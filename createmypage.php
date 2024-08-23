@@ -31,13 +31,13 @@ if (isset($_SESSION['usersid'])) {
 
 $user_info = fetch_user_info_from_database($user_id);
 // プロフィール情報を表示
-// echo "名前: " . htmlspecialchars($user_info['username']);
+// echo "名前: " . htmlspecialchars($user_info['name']);
 // echo "コメント: " . htmlspecialchars($user_info['bio']);
 
 // 編集フォームを表示
 echo "<form action='updatemypage.php' method='post' style='max-width: 300px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>";
-echo "<label for='username'>名前:</label><br>";
-echo "<input type='text' id='username' name='username' value='" . htmlspecialchars($user_info['username']) . "' style='width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;'><br>";
+echo "<label for='name'>名前:</label><br>";
+echo "<input type='text' id='name' name='name' value='" . htmlspecialchars($user_info['name']) . "' style='width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;'><br>";
 echo "<label for='bio'>説明文:</label><br>";
 echo "<textarea id='bio' name='bio' style='width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; height: 150px;'>" . htmlspecialchars($user_info['bio']) . "</textarea><br>";
 echo "<input type='submit' value='保存' style='background-color: blue; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: block; width: 50%; margin: 0 auto; font-size: 16px; border-radius: 4px; cursor: pointer;'>";

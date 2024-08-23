@@ -7,7 +7,7 @@ require_once 'db_connect.php'; // データベース接続設定ファイル
 $user_id = $_SESSION['usersid'];
 
 // POSTされた新しい名前とコメントを取得
-$new_name = $_POST['username'];
+$new_name = $_POST['name'];
 $new_bio = $_POST['bio'];
 
 // データベースを更新
