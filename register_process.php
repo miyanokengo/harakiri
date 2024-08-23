@@ -44,6 +44,6 @@ if(empty($_POST["username"])){
 
     }}
         if($error_flg != 1){
-            header("Location:register_result.php");
+            header("Location:login.php");
         }
 ?>
