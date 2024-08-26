@@ -1,0 +1,32 @@
+a {
+    text-decoration: none; /* 下線を削除 */
+    color: #007bff; /* リンクの色 */
+    font-family: Arial, sans-serif; /* フォント */
+    font-size: 16px; /* フォントサイズ */
+    padding: 10px; /* パディング */
+    margin-right: 15px; /* リンクの間隔 */
+    border-radius: 4px; /* 角を丸める */
+    display: inline-block; /* インラインブロックにする */
+    transition: background-color 0.3s, color 0.3s; /* 背景色とテキスト色の遷移 */
+}
+
+/* ホバー時のスタイル */
+a:hover, a:focus {
+    color: #ffffff; /* ホバー時のテキスト色 */
+    background-color: #007bff; /* ホバー時の背景色 */
+    text-decoration: none; /* ホバー時も下線を削除 */
+}
+
+/* リンクがアクティブ（クリック中）時のスタイル */
+a:active {
+    color: #0056b3; /* アクティブ時のテキスト色 */
+    background-color: #e2e6ea; /* アクティブ時の背景色 */
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    a {
+        display: block; /* スマホではリンクをブロック表示 */
+        margin-bottom: 10px; /* 下に余白を追加 */
+    }
+}
