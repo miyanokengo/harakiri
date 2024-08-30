@@ -20,14 +20,14 @@ session_start();
 // プロフィールページでセッションからユーザーIDを取得し、該当するユーザー情報を取得
 $user_id = $_SESSION['usersid'];
 //セッションがあるか確認
-if (isset($_SESSION['usersid'])) {
-    $user_id = $_SESSION['usersid'];
-    echo "セッション変数 'usersid' には値が入っています。";
-    // $user_id を使って何か処理を行う場合はここに記述する
-} else {
-    echo "セッション変数 'usersid' は設定されていません。";
-    // セッション変数が設定されていない場合の処理を記述する（例えばログインページにリダイレクトするなど）
-}
+// if (isset($_SESSION['usersid'])) {
+//     $user_id = $_SESSION['usersid'];
+//     echo "セッション変数 'usersid' には値が入っています。";
+//     // $user_id を使って何か処理を行う場合はここに記述する
+// } else {
+//     echo "セッション変数 'usersid' は設定されていません。";
+//     // セッション変数が設定されていない場合の処理を記述する（例えばログインページにリダイレクトするなど）
+// }
 
 $user_info = fetch_user_info_from_database($user_id);
 // プロフィール情報を表示
