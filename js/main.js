@@ -22,7 +22,7 @@ const selectURL = 'http://localhost/harakiri/api/home.php'
 //初期表示用に一度動かす
 getPost()
 //1秒おきに取得
-// setInterval(getPost, 1000)
+setInterval(getPost, 1000)
 
 function getPost() {
     // 投稿の取得用PHPに対してGETでidを送信する
@@ -30,6 +30,8 @@ function getPost() {
     // select.phpのJSONをJSのオブジェクトに変換する
     .then((res) => res.json())
     .then((json) => {
+        //テーブルの中にあるHTMLをすべて削除する
+        document.getElementById('table-body').innerHTML="";
         // JSONデータを受け取った後の処理
         json.forEach((value) => {
             console.log(value);
@@ -52,9 +54,10 @@ function getPost() {
             tr.appendChild(created_atTd);
             tr.appendChild(nicepointTd);
             tr.appendChild(imageTd);
-
+            
             document.getElementById('table-body').appendChild(tr);
         });
+    
     })
     
 }

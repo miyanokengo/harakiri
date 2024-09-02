@@ -1,0 +1,181 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e6ecf0;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e1e8ed;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #1da1f2;
+}
+
+/* テーブルスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* テーブルヘッダーのスタイル */
+th {
+    text-align: left;
+    padding: 10px;
+    background-color: #f5f8fa;
+    color: #657786;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+/* 各投稿のスタイル */
+tbody tr {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 最初の行はテーブルヘッダーなので無視 */
+tbody tr:first-child {
+    display: table-row;
+    background-color: transparent;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+/* ユーザーアイコンのスタイル */
+td:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* コンテンツ部分のスタイル */
+td:nth-child(2) {
+    flex: 1;
+    padding: 0 10px;
+}
+
+td:nth-child(2) .username {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+td:nth-child(2) .content {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    
+}
+
+td:nth-child(2) .created_at {
+    font-size: 12px;
+    color: #777;
+}
+
+td:nth-child(2) .actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+td:nth-child(2) .actions span {
+    font-size: 16px;
+    margin-right: 20px;
+    color: #657786;
+    cursor: pointer;
+}
+
+td:nth-child(2) .actions span:hover {
+    color: #1da1f2;
+}
+
+/* 画像部分のスタイル */
+td:nth-child(5) img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* ユーザーセッションのスタイル */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    margin-right: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #1da1f2;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 記事投稿フォームのスタイル */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+form p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="submit"] {
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0d95e8;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
