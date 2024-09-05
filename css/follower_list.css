@@ -1,0 +1,49 @@
+/* 全体のスタイル設定 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* 背景色を少し淡いグレーに */
+}
+
+/* ヘッダーのスタイル */
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* リストのスタイル設定 */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 8px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* リストアイテムのホバーエフェクト */
+li:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+/* リンクのスタイル設定（必要に応じて） */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
