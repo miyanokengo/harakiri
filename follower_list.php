@@ -31,6 +31,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>フォロワー一覧</title>
+    <link rel="stylesheet" href="css/follower_list.css">
 </head>
 <body>
     <h1>フォロワー一覧</h1>

@@ -31,6 +31,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>フォローしているユーザー一覧</title>
+    <link rel="stylesheet" href="css/follow_list.css">
 </head>
 <body>
     <h1>フォローしているユーザー一覧</h1>
