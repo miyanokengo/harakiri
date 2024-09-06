@@ -21,6 +21,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
     <title>Document</title>
 </head>
 <body>
@@ -76,8 +77,8 @@ try {
     </div>
 <?php endif; ?>
 
-//きじのいちらんをjsonで取得するプログラムこれをajaxで呼び出す。
-//投稿された内容を登録するこれをajaxように改造する。
+<!-- //きじのいちらんをjsonで取得するプログラムこれをajaxで呼び出す。
+//投稿された内容を登録するこれをajaxように改造する。 -->
 <script src="js/main.js"></script>
 </body>
 </html>
